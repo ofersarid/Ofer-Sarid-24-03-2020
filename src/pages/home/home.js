@@ -14,7 +14,7 @@ class Home extends PureComponent {
 
   render() {
     return (
-      <div className={cx(styles.home)} >Home</div >
+      <div className={cx(styles.weather)} >Home</div >
     );
   }
 }

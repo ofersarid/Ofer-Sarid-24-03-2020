@@ -4,7 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import Home from '../pages/home/home';
+import { Home } from '../pages';
+import NavBar from './nav-bar';
 // import PropTypes from 'prop-types';
 // import styles from './styles.scss';
 
@@ -19,7 +20,7 @@ class App extends PureComponent {
       <Router >
         <Redirect to="/home" />
         <div >
-          App
+          <NavBar />
           <Route exact path="/home" >
             <Home />
           </Route >

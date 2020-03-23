@@ -1,0 +1,37 @@
+@import '../styles';
+
+.switch {
+  display: flex;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  flex-shrink: 0;
+  height: 50px;
+  font-size: 18px;
+  line-height: 18px;
+  text-transform: capitalize;
+}
+
+.switchItem {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+
+  & > div {
+    transform: translateY(-1px);
+  }
+}
+
+.indicator {
+  background: $green;
+  height: 100%;
+  left: 0;
+  right: 0;
+  position: absolute;
+  border-radius: 3px;
+}

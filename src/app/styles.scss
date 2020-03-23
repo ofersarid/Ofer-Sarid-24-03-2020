@@ -1,2 +1,30 @@
 .app {
+  width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBar {
+  height: 10%;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.right {
+  .switch {
+    width: 400px;
+  }
+}
+
+.left {
+
 }
