@@ -3,9 +3,10 @@ import React, { PureComponent } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, withRouter } from 'react-router-dom';
 import { Home } from '../pages';
 import NavBar from './nav-bar';
+import PropTypes from 'prop-types';
 // import PropTypes from 'prop-types';
 // import styles from './styles.scss';
 
@@ -16,26 +17,32 @@ class App extends PureComponent {
   }
 
   render() {
+    const { location } = this.props;
     return (
       <Router >
-        <Redirect to="/home" />
         <div >
           <NavBar />
-          <Route exact path="/home" >
+          <Route exact path="/home/:locationKey?" >
             <Home />
           </Route >
         </div >
+        {!location.pathname.match(/^\/home$|^\/home\/[0-9]*$|^\/favorites$/) && <Redirect to="/home" />}
       </Router >
     );
   }
 }
 
-App.propTypes = {};
+App.propTypes = {
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
 export default compose(
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 )(App);

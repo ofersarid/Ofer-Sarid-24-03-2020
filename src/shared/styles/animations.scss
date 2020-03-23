@@ -1,0 +1,77 @@
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dimm {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes undimm {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+$ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+$popIn: popIn .75s forwards $ease;
+$dimm: dimm .2s forwards $ease;
+$undimm: undimm .2s forwards $ease;
+$fadeIn: fadeIn .2s forwards $ease;
+$slideInUp: slideInUp .2s forwards $ease;
+$slideInRight: slideInRight 1s forwards $ease;

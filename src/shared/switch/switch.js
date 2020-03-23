@@ -12,10 +12,8 @@ class Switch extends PureComponent {
   }
 
   componentDidMount() {
-    const { options } = this.props;
     const index = this.getSelectedIndex();
     this.prevIndex = index;
-    this.onChange(options[index]);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
