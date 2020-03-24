@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import styles from './styles.scss';
 import SearchBox from './search-box';
-import SearchResults from './search-results';
+// import SearchResults from './search-results';
+import Forecast from './forecast';
 import { search } from '../../services';
 
 class Home extends PureComponent {
@@ -16,6 +17,7 @@ class Home extends PureComponent {
     autoBind(this);
     this.state = {
       working: false,
+      city: 'Tel Aviv'
     };
     this.onChDB = debounce(this.onSearchChange, 300);
   }
@@ -27,26 +29,31 @@ class Home extends PureComponent {
     this.setState({ working: false });
   }
 
+  setCity(city) {
+    this.setState({ city });
+  }
+
   render() {
-    const { working } = this.state;
+    const { working, city } = this.state;
     return (
       <div className={cx(styles.home)} >
         <SearchBox onChange={this.onChDB} />
-        <SearchResults />
+        {/*<SearchResults setCity={this.setCity} />*/}
         {working ? 'Working' : null}
+        <Forecast city={city} />
       </div >
     );
   }
 }
 
 Home.propTypes = {
-  searchCity: PropTypes.func.isRequired,
+  searchCity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
 const mapDispatchToProps = dispatch => ({
-  searchCity: query => dispatch(search.actions.getResults(query)),
+  searchCity: query => dispatch(search.actions.getResults(query))
 });
 
 export default compose(

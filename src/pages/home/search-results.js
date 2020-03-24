@@ -16,9 +16,10 @@ class SearchResults extends PureComponent {
     autoBind(this);
   }
 
-  addParamToURL(locationKey) {
-    const { history } = this.props;
-    history.push(`/home/${locationKey}`);
+  selectCity(itm) {
+    const { history, setCity } = this.props;
+    setCity(itm.get('EnglishName'));
+    history.push(`/home/${itm.get('Key')}`);
   }
 
   render() {
@@ -26,7 +27,7 @@ class SearchResults extends PureComponent {
     return (
       <ul className={cx(styles.searchResults)} >
         {searchResults.map(itm => (
-          <li key={itm.get('Key')} onClick={ () => this.addParamToURL(itm.get('Key'))}>
+          <li key={itm.get('Key')} onClick={ () => this.selectCity(itm)}>
             <span className={styles.country} >{itm.getIn(['Country', 'EnglishName'])}</span >
             <span className={styles.divider} >/</span >
             <span className={styles.city} >{itm.getIn(['EnglishName'])}</span >
@@ -41,7 +42,8 @@ SearchResults.propTypes = {
   searchResults: ImmutablePropTypes.list,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  setCity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -23,6 +23,7 @@
     "react-router-dom": "^5.1.2",
     "react-spring": "^8.0.27",
     "react-use-localstorage": "^3.2.1",
+    "reactjs-localstorage": "^0.0.8",
     "redux": "^4.0.5",
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
@@ -49,6 +50,7 @@
     "install-peers": "^1.0.3",
     "node-sass": "^4.11.0",
     "parcel-bundler": "^1.11.0",
+    "parcel-plugin-static-files-copy": "^2.3.1",
     "postcss-modules": "^1.4.1",
     "pre-commit": "^1.2.2",
     "sass": "^1.15.1",
@@ -67,5 +69,14 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "src/images",
+        "staticOutDir": "images"
+      }
+    ],
+    "watcherGlob": "**"
+  }
 }

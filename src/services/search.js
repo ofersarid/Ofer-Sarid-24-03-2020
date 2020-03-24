@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import axios from 'axios';
 
 const STORE_RESULTS = 'SEARCH/STORE_RESULTS';
+const API_KEY = 'AEihxQE2Ak5AlcuU8ZyKfPDhwBgAlAG8';
 
 const reducer = (state = fromJS({
   results: [
@@ -538,12 +539,12 @@ const actions = {
     //     ]);
     //   }, 1000);
     // });
-    const resp = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=AEihxQE2Ak5AlcuU8ZyKfPDhwBgAlAG8&q=${encodeURI(query)}`);
+    const resp = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURI(query)}`);
     return dispatch({
       type: STORE_RESULTS,
       payload: resp.data,
     });
-  }
+  },
 };
 
 const selectors = {
