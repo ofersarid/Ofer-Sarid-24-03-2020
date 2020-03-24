@@ -4,11 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import { BrowserRouter as Router, Route, Redirect, withRouter } from 'react-router-dom';
-import { Home } from '../pages';
-import NavBar from './nav-bar';
 import PropTypes from 'prop-types';
-// import PropTypes from 'prop-types';
-// import styles from './styles.scss';
+import { Home, Favorites } from '../pages';
+import NavBar from './nav-bar';
 
 class App extends PureComponent {
   constructor(props) {
@@ -22,11 +20,14 @@ class App extends PureComponent {
       <Router >
         <div >
           <NavBar />
-          <Route exact path="/home/:locationKey?" >
+          <Route exact path="/home/:locationKey" >
             <Home />
           </Route >
+          <Route exact path="/favorites/:locationKey" >
+            <Favorites />
+          </Route >
         </div >
-        {!location.pathname.match(/^\/home$|^\/home\/[0-9]*$|^\/favorites$/) && <Redirect to="/home" />}
+        {!location.pathname.match(/^^\/home\/[0-9]*$|^\/favorites\/[0-9]*$/) && <Redirect to="/home/215854" />}
       </Router >
     );
   }
@@ -35,7 +36,7 @@ class App extends PureComponent {
 App.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({}); // eslint-disable-line

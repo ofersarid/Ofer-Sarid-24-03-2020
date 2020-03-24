@@ -17,8 +17,7 @@ class SearchResults extends PureComponent {
   }
 
   selectCity(itm) {
-    const { history, setCity } = this.props;
-    setCity(itm.get('EnglishName'));
+    const { history } = this.props;
     history.push(`/home/${itm.get('Key')}`);
   }
 
@@ -43,7 +42,6 @@ SearchResults.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  setCity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

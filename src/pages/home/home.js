@@ -29,18 +29,14 @@ class Home extends PureComponent {
     this.setState({ working: false });
   }
 
-  setCity(city) {
-    this.setState({ city });
-  }
-
   render() {
-    const { working, city } = this.state;
+    const { working } = this.state;
     return (
       <div className={cx(styles.home)} >
         <SearchBox onChange={this.onChDB} />
-        {/*<SearchResults setCity={this.setCity} />*/}
+        {/*<SearchResults />*/}
         {working ? 'Working' : null}
-        <Forecast city={city} />
+        <Forecast />
       </div >
     );
   }

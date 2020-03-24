@@ -3,11 +3,7 @@
 $spacing: 50px;
 
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 90%;
-  max-height: calc(100% - 60px);
+  @extend %stage;
 }
 
 .searchBox {
@@ -120,9 +116,9 @@ $spacing: 50px;
 
     svg {
       fill: $red;
-      height: 50px;
-      padding: 10px;
+      height: 40px;
       cursor: pointer;
+      @extend %bounce;
     }
   }
 

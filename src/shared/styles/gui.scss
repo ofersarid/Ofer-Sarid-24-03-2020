@@ -1,3 +1,11 @@
 %box-border {
   box-shadow: 0 0 0 1px rgba(black, 0.2);
 }
+
+%stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90%;
+  max-height: calc(100% - 60px);
+}

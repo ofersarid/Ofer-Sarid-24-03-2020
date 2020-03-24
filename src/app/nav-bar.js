@@ -16,7 +16,7 @@ class NavBar extends PureComponent {
 
   onChange(route) {
     const { history } = this.props;
-    history.push(`/${route}`);
+    history.push(`/${route}/${history.location.pathname.split('/')[2]}`);
   };
 
   render() {

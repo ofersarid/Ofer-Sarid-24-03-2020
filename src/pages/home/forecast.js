@@ -9,7 +9,6 @@ import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import { HeartOutlined } from '@styled-icons/entypo/HeartOutlined';
 import { Heart } from '@styled-icons/entypo/Heart';
-import { reactLocalStorage } from 'reactjs-localstorage';
 import styles from './styles.scss';
 import { forecast, favorites } from '../../services';
 
@@ -17,6 +16,11 @@ class Forecast extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
+  }
+
+  componentDidMount() {
+    // const { getCityByKey, match } = this.props;
+    // getCityByKey(match.params.locationKey);
   }
 
   getWeatherIcon(iconCode) {
@@ -27,14 +31,6 @@ class Forecast extends PureComponent {
     const { match, toggleFavorite } = this.props;
     const locationKey = match.params.locationKey;
     toggleFavorite(locationKey);
-  }
-
-  isFavorite() {
-    const { match } = this.props;
-    const favorites = reactLocalStorage.getObject('favorites', [], true);
-    const locationKey = match.params.locationKey;
-    const index = favorites.findIndex(itm => itm === locationKey);
-    return index >= 0;
   }
 
   render() {
@@ -93,16 +89,19 @@ Forecast.propTypes = {
   history: PropTypes.object.isRequired,
   toggleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
+  getCityByKey: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   dailyForecasts: forecast.selectors.daily(state),
   nowForecasts: forecast.selectors.now(state),
+  city: forecast.selectors.city(state),
   isFavorite: favorites.selectors.isFavorite(state, ownProps.match.params.locationKey),
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleFavorite: locationKey => dispatch(favorites.actions.toggle(locationKey)),
+  getCityByKey: locationKey => dispatch(forecast.actions.getCityByKey(locationKey)),
 });
 
 export default compose(
