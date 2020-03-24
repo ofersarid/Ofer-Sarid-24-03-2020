@@ -23,10 +23,10 @@ class Home extends PureComponent {
   }
 
   async onSearchChange(val) {
-    const { searchCity } = this.props;
-    this.setState({ working: true });
-    await searchCity(val);
-    this.setState({ working: false });
+    // const { searchCity } = this.props;
+    // this.setState({ working: true });
+    // await searchCity(val);
+    // this.setState({ working: false });
   }
 
   render() {
