@@ -58,11 +58,18 @@ $spacing: 50px;
     padding: 25px;
     font-size: 22px;
     @extend %box-border;
+    @extend %popIn;
     border-radius: 6px;
     margin: 0 $cardSpacing;
     width: calc(50% - 20px);
     height: 75px;
     box-sizing: border-box;
+
+    @for $i from 0 to 50 {
+      &:nth-of-type(#{$i + 1}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
   }
 
   .country {
@@ -94,6 +101,11 @@ $spacing: 50px;
     & > div {
       display: inline-flex;
       align-items: center;
+      @extend %popIn;
+
+      &:nth-of-type(2) {
+        animation-delay: 0.5s;
+      }
 
       img {
         transform: translateY(2px);
@@ -132,6 +144,7 @@ $spacing: 50px;
     & > li {
       $cardSpacing: 10px;
       @extend %box-border;
+      @extend %popIn;
       width: calc(20% - #{2 * $cardSpacing});
       margin: 0 $cardSpacing;
       padding: 20px;
@@ -142,6 +155,12 @@ $spacing: 50px;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
+
+      @for $i from 0 to 50 {
+        &:nth-of-type(#{$i + 1}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
 
       h2 {
         margin: 0 0 5px;

@@ -38,16 +38,18 @@ class Forecast extends PureComponent {
     return (
       <div className={cx(styles.forecast)} >
         <section className={styles.header} >
-          <div className={styles.left} >
+          <div >
             <img src={`/images/weather-icons/${this.getWeatherIcon(dailyForecasts.getIn([0, 'Day', 'Icon']))}`} />
             <h1 >{city}</h1 >
             <span className={styles.temperature} >{nowForecasts.getIn(['Temperature', 'Value'])}&deg;</span >
             <span className={styles.unit} >{nowForecasts.getIn(['Temperature', 'Unit'])}</span >
           </div >
-          {isFavorite
-            ? <Heart onClick={this.toggleFavorite} />
-            : <HeartOutlined onClick={this.toggleFavorite} />
-          }
+          <div >
+            {isFavorite
+              ? <Heart onClick={this.toggleFavorite} />
+              : <HeartOutlined onClick={this.toggleFavorite} />
+            }
+          </div >
         </section >
         <ul className={styles.cards} >
           {dailyForecasts.map(itm => (
@@ -89,19 +91,19 @@ Forecast.propTypes = {
   history: PropTypes.object.isRequired,
   toggleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  getCityByKey: PropTypes.func.isRequired,
+  getCityByKey: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
   dailyForecasts: forecast.selectors.daily(state),
   nowForecasts: forecast.selectors.now(state),
   city: forecast.selectors.city(state),
-  isFavorite: favorites.selectors.isFavorite(state, ownProps.match.params.locationKey),
+  isFavorite: favorites.selectors.isFavorite(state, ownProps.match.params.locationKey)
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleFavorite: locationKey => dispatch(favorites.actions.toggle(locationKey)),
-  getCityByKey: locationKey => dispatch(forecast.actions.getCityByKey(locationKey)),
+  getCityByKey: locationKey => dispatch(forecast.actions.getCityByKey(locationKey))
 });
 
 export default compose(

@@ -5,12 +5,12 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: 3px;
   flex-shrink: 0;
   height: 50px;
   font-size: 18px;
   line-height: 18px;
   text-transform: capitalize;
+  border-radius: 30px;
 }
 
 .switchItem {
@@ -33,5 +33,4 @@
   left: 0;
   right: 0;
   position: absolute;
-  border-radius: 3px;
 }

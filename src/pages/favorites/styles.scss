@@ -9,6 +9,8 @@
 
     h1 {
       padding-left: 10px;
+      @extend %popIn;
+      display: inline-block;
     }
   }
 
@@ -22,6 +24,7 @@
     li {
       $cardSpacing: 10px;
       @extend %box-border;
+      @extend %popIn;
       width: calc(20% - #{2 * $cardSpacing});
       margin: $cardSpacing $cardSpacing;
       padding: 20px;
@@ -32,6 +35,12 @@
       justify-content: center;
       align-items: center;
       border-radius: 10px;
+
+      @for $i from 0 to 50 {
+        &:nth-of-type(#{$i + 1}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
 
       h2 {
         margin: 0 0 15px;
@@ -56,40 +65,6 @@
 
       .unit {
         transform: translateY(16px);
-      }
-
-      .divider {
-        width: 10px;
-        height: 1px;
-        background: rgba(black, 0.5);
-        margin: 0 10px;
-        display: inline-block;
-      }
-
-      .dayNight {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        justify-content: space-between;
-
-        li {
-          width: 50%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 10px;
-
-          &.divider {
-            width: 1px;
-            flex-shrink: 0;
-            height: 100%;
-            background: rgba(black, 0.2);
-            margin: 0 10px;
-            padding: 0;
-          }
-        }
       }
     }
   }
