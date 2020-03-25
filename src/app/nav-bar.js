@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import cx from 'classnames';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
+import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
@@ -15,15 +16,18 @@ class NavBar extends PureComponent {
   }
 
   onChange(route) {
-    const { history } = this.props;
-    history.push(`/${route}/${history.location.pathname.split('/')[2]}`);
+    const { history, push } = this.props;
+    push(`/${route}/${history.location.pathname.split('/')[2]}`);
   };
 
   render() {
     const { location } = this.props;
     return (
       <div className={cx(styles.navBar)} >
-        <section className={styles.left} ></section>
+        <section className={styles.left} >
+          <img src={'/images/herolo-logo.jpg'} />
+          <h1>Herolo Weather App</h1>
+        </section>
         <section className={styles.right} >
           <Switch
             className={styles.switch}
@@ -40,12 +44,15 @@ class NavBar extends PureComponent {
 NavBar.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({}); // eslint-disable-line
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  push: (...props) => dispatch(push(...props)),
+});
 
 export default compose(
   withRouter,

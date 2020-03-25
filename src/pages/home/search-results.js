@@ -17,7 +17,8 @@ class SearchResults extends PureComponent {
   }
 
   selectCity(itm) {
-    const { history } = this.props;
+    const { history, clearSearchResults } = this.props;
+    clearSearchResults();
     history.push(`/home/${itm.get('Key')}`);
   }
 
@@ -42,13 +43,16 @@ SearchResults.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  clearSearchResults: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  searchResults: search.selectors.results(state)
+  searchResults: search.selectors.results(state),
 });
 
-const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
+const mapDispatchToProps = dispatch => ({
+  clearSearchResults: () => dispatch(search.actions.clearResults()),
+});
 
 export default compose(
   withRouter,

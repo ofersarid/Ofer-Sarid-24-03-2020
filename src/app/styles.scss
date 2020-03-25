@@ -11,32 +11,63 @@
 }
 
 .navBar {
-  height: 10%;
+  height: 60px;
   width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0 50px;
+  box-shadow: 0 1px 4px rgba(black, 0.15);
+  padding: 0 15px;
   box-sizing: border-box;
-  min-height: 60px;
-}
+  position: fixed;
+  backdrop-filter: blur(5px);
+  z-index: 1;
+  background: rgba(white, 0.5);
 
-.right {
-  .switch {
-    width: 400px;
+  @include media('>phone') {
+    padding: 0 50px;
+    height: 70px;
   }
-}
 
-.left {
+  .right {
+    .switch {
+      width: calc(100vw - 100px);
+      height: 40px;
 
-}
+      @include media('>phone') {
+        width: 300px;
+      }
 
-.toastContainer {
-  padding: 8px 8px 8px 20px !important;
-  //@extend %popIn;
-}
+      @include media('>tablet') {
+        width: 400px;
+        height: 50px;
+      }
+    }
+  }
 
-.toastsWrapper {
+  .left {
+    display: flex;
+    align-items: center;
 
+    img {
+      height: 40px;
+      border-radius: 3px;
+      margin-right: 15px;
+
+      @include media('>phone') {
+        margin-right: 0;
+        height: 50px;
+      }
+    }
+
+    h1 {
+      display: none;
+
+      @include media('>phone') {
+        padding-left: 20px;
+        display: block;
+      }
+    }
+  }
 }

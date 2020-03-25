@@ -10,7 +10,7 @@ import { forecast } from '../../services';
 
 const SearchBox = ({ onChange, city }) => (
   <div className={cx(styles.searchBox)} >
-    <input type="text" onChange={e => onChange(e.target.value)} placeHolder={`Search for city (${city})`} />
+    <input type="text" onChange={e => onChange(e.target.value)} placeholder={`Search for city (${city})`} />
     <SearchAlt />
   </div >
 );

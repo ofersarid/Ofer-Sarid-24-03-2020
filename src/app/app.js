@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-// import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
-import { BrowserRouter as Router, Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router/immutable';
 import PropTypes from 'prop-types';
 import { Home, Favorites } from '../pages';
+import { router } from '../services';
 import NavBar from './nav-bar';
 
 class App extends PureComponent {
@@ -14,10 +15,18 @@ class App extends PureComponent {
     autoBind(this);
   }
 
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   const { locationKey, clearSearchResults } = this.props;
+  //   const prevLocationKey = prevProps.locationKey;
+  //   if (locationKey !== prevLocationKey) {
+  //     clearSearchResults();
+  //   }
+  // }
+
   render() {
-    const { location } = this.props;
+    const { pathname, history } = this.props;
     return (
-      <Router >
+      <ConnectedRouter history={history} >
         <div >
           <NavBar />
           <Route exact path="/home/:locationKey" >
@@ -27,23 +36,26 @@ class App extends PureComponent {
             <Favorites />
           </Route >
         </div >
-        {!location.pathname.match(/^^\/home\/[0-9]*$|^\/favorites\/[0-9]*$/) && <Redirect to="/home/215854" />}
-      </Router >
+        {!pathname.match(/^^\/home\/[0-9]*$|^\/favorites\/[0-9]*$/) && <Redirect to="/home/215854" />}
+      </ConnectedRouter >
     );
   }
 }
 
 App.propTypes = {
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
+  // locationKey: PropTypes.string.isRequired,
+  // clearSearchResults: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = state => ({
+  locationKey: router.selectors.locationKey(state),
+  pathname: router.selectors.pathname(state),
+});
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line
 
 export default compose(
-  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 )(App);
