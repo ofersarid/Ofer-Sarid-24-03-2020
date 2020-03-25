@@ -6,11 +6,10 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
-import { withRouter } from 'react-router-dom';
 import { HeartOutlined } from '@styled-icons/entypo/HeartOutlined';
 import { Heart } from '@styled-icons/entypo/Heart';
 import styles from './styles.scss';
-import { forecast, favorites } from '../../services';
+import { forecast, favorites, router } from '../../services';
 
 class Forecast extends PureComponent {
   constructor(props) {
@@ -19,8 +18,8 @@ class Forecast extends PureComponent {
   }
 
   componentDidMount() {
-    // const { getCityByKey, match } = this.props;
-    // getCityByKey(match.params.locationKey);
+    const { getCityByKey, locationKey } = this.props;
+    getCityByKey(locationKey);
   }
 
   getWeatherIcon(iconCode) {
@@ -28,14 +27,13 @@ class Forecast extends PureComponent {
   }
 
   toggleFavorite() {
-    const { match, toggleFavorite } = this.props;
-    const locationKey = match.params.locationKey;
+    const { locationKey, toggleFavorite } = this.props;
     toggleFavorite(locationKey);
   }
 
   render() {
     const { dailyForecasts, city, nowForecasts, isFavorite } = this.props;
-    return (
+    return (dailyForecasts && nowForecasts) ? (
       <div className={cx(styles.forecast)} >
         <section className={styles.header} >
           <div >
@@ -78,27 +76,26 @@ class Forecast extends PureComponent {
           ))}
         </ul >
       </div >
-    );
+    ) : null;
   }
 }
 
 Forecast.propTypes = {
-  dailyForecasts: ImmutablePropTypes.list.isRequired,
-  nowForecasts: ImmutablePropTypes.map.isRequired,
-  city: PropTypes.string.isRequired,
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  dailyForecasts: ImmutablePropTypes.list,
+  nowForecasts: ImmutablePropTypes.map,
+  city: PropTypes.string,
+  locationKey: PropTypes.string,
   toggleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   getCityByKey: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   dailyForecasts: forecast.selectors.daily(state),
   nowForecasts: forecast.selectors.now(state),
   city: forecast.selectors.city(state),
-  isFavorite: favorites.selectors.isFavorite(state, ownProps.match.params.locationKey)
+  isFavorite: favorites.selectors.isFavorite(state, router.selectors.locationKey(state)),
+  locationKey: router.selectors.locationKey(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -107,6 +104,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 )(Forecast);

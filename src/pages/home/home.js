@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import { withRouter } from 'react-router-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from './styles.scss';
 import SearchBox from './search-box';
 import SearchResults from './search-results';
 import Forecast from './forecast';
-import { search } from '../../services';
+import { router, search, forecast } from '../../services';
 
 class Home extends PureComponent {
   constructor(props) {
@@ -23,11 +22,17 @@ class Home extends PureComponent {
     this.onChDB = debounce(this.onSearchChange, 300);
   }
 
+  componentDidMount() {
+    const { getNowForecast, getDailyForecast, locationKey } = this.props;
+    getDailyForecast(locationKey);
+    getNowForecast(locationKey);
+  }
+
   async onSearchChange(val) {
-    // const { searchCity } = this.props;
-    // this.setState({ working: true });
-    // await searchCity(val);
-    // this.setState({ working: false });
+    const { searchCity } = this.props;
+    this.setState({ working: true });
+    await searchCity(val);
+    this.setState({ working: false });
   }
 
   render() {
@@ -45,21 +50,23 @@ class Home extends PureComponent {
 
 Home.propTypes = {
   searchCity: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  getDailyForecast: PropTypes.func.isRequired,
+  getNowForecast: PropTypes.func.isRequired,
+  locationKey: PropTypes.string.isRequired,
   searchResults: ImmutablePropTypes.list,
 };
 
 const mapStateToProps = state => ({
-  searchResults: search.selectors.results(state)
+  searchResults: search.selectors.results(state),
+  locationKey: router.selectors.locationKey(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchCity: query => dispatch(search.actions.getResults(query))
+  searchCity: query => dispatch(search.actions.getResults(query)),
+  getDailyForecast: locationKey => dispatch(forecast.actions.getDaily(locationKey)),
+  getNowForecast: locationKey => dispatch(forecast.actions.getNow(locationKey)),
 });
 
 export default compose(
-  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 )(Home);

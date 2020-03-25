@@ -58,7 +58,9 @@ const actions = {
 
 const selectors = {
   favorites: state => state.getIn(['favorites', 'locationKeys']),
-  isFavorite: (state, locationKey) => Boolean(state.getIn(['favorites', 'locationKeys']).find(itm => itm === locationKey))
+  isFavorite: (state, locationKey) => {
+    return Boolean(state.getIn(['favorites', 'locationKeys']).find(itm => itm === locationKey));
+  }
 };
 
 export default {

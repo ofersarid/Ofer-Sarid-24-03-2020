@@ -8,16 +8,19 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import { forecast } from '../../services';
 
-const SearchBox = ({ onChange, city }) => (
-  <div className={cx(styles.searchBox)} >
-    <input type="text" onChange={e => onChange(e.target.value)} placeholder={`Search for city (${city})`} />
-    <SearchAlt />
-  </div >
-);
+const SearchBox = ({ onChange, city }) => {
+  const _city = city ? `(${city})` : '';
+  return (
+    <div className={cx(styles.searchBox)} >
+      <input type="text" onChange={e => onChange(e.target.value)} placeholder={`Search for city ${_city}`} />
+      <SearchAlt />
+    </div >
+  );
+};
 
 SearchBox.propTypes = {
   onChange: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired
+  city: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
