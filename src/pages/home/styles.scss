@@ -124,11 +124,15 @@ $mobileSpacing: 7%;
 }
 
 .forecast {
-  width: 1200px;
-  max-width: 90vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include media('>phone') {
+    width: 1200px;
+    max-width: 90vw;
+  }
 
   .header {
     width: 100%;
@@ -136,9 +140,12 @@ $mobileSpacing: 7%;
     align-items: center;
     justify-content: space-between;
     margin-bottom: $mobileSpacing;
+    padding: 0 5vw;
+    box-sizing: border-box;
 
     @include media('>phone') {
       margin-bottom: $spacing;
+      padding: 0;
     }
 
     & > div {
@@ -179,18 +186,17 @@ $mobileSpacing: 7%;
   }
 
   .cards {
+    $cardSpacing: 10px;
     list-style: none;
-    padding: 0;
+    padding: 0 0 0 calc(10vw - #{2 * $cardSpacing});
     margin: 0;
     display: flex;
     width: 100%;
     overflow-y: visible;
     overflow-x: auto;
-    //height: 100%;
 
     @include media('>phone') {
       flex-wrap: wrap;
-      //height: calc(100% - 0px);
       overflow: auto;
     }
 
@@ -199,7 +205,6 @@ $mobileSpacing: 7%;
     }
 
     & > li {
-      $cardSpacing: 10px;
       border: 1px solid rgba(black, 0.2);
       @extend %popIn;
       width: calc(20% - #{2 * $cardSpacing});
