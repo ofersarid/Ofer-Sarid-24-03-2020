@@ -32,7 +32,8 @@
     "src": "^1.1.2",
     "store": "^2.0.12",
     "styled-components": "^4.2.0",
-    "styled-icons": "^10.2.1"
+    "styled-icons": "^10.2.1",
+    "toasted-notes": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

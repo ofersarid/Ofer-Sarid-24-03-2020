@@ -17,6 +17,17 @@ $mobileSpacing: 7%;
   position: relative;
   flex-shrink: 0;
 
+  &.dark {
+    input {
+      background: rgba($white, 0.05);
+      @extend %box-border-light;
+
+      &:focus {
+        box-shadow: 0 0 0 2px $purpleDark;
+      }
+    }
+  }
+
   @include media('>phone') {
     height: $spacing;
     margin: $spacing 0;
@@ -40,7 +51,7 @@ $mobileSpacing: 7%;
     }
 
     &:focus {
-      box-shadow: 0 0 0 2px $green;
+      box-shadow: 0 0 0 2px $purple;
     }
   }
 

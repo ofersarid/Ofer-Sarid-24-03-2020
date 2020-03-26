@@ -12,6 +12,10 @@
   text-transform: capitalize;
   border-radius: 3px;
   border: 1px solid darken($purple, 40%);
+
+  &.dark {
+    border: 1px solid lighten($purpleDark, 15%);
+  }
 }
 
 .switchItem {
@@ -34,4 +38,8 @@
   left: 0;
   right: 0;
   position: absolute;
+
+  &.dark {
+    background: $purpleDark;
+  }
 }

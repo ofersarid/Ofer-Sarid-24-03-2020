@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
 import { compose } from 'redux';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 import { Route, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router/immutable';
 import PropTypes from 'prop-types';
 import { Home, Favorites } from '../pages';
-import { router } from '../services';
+import { router, user } from '../services';
 import NavBar from './nav-bar';
+import styles from './styles.scss';
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,10 +26,10 @@ class App extends PureComponent {
   // }
 
   render() {
-    const { pathname, history } = this.props;
+    const { pathname, history, theme } = this.props;
     return (
       <ConnectedRouter history={history} >
-        <div >
+        <div className={cx(styles.app, styles[theme])}>
           <NavBar />
           <Route exact path="/home/:locationKey" >
             <Home />
@@ -45,13 +47,13 @@ class App extends PureComponent {
 App.propTypes = {
   pathname: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  // locationKey: PropTypes.string.isRequired,
-  // clearSearchResults: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   locationKey: router.selectors.locationKey(state),
   pathname: router.selectors.pathname(state),
+  theme: user.selectors.theme(state),
 });
 
 const mapDispatchToProps = dispatch => ({}); // eslint-disable-line

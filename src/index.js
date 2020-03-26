@@ -5,10 +5,11 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router/immutable';
 import thunk from 'redux-thunk';
 import { Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import 'toasted-notes/src/styles.css';
 import combineReducers from './combine-reducers';
 import './styles.scss';
 import App from './app/app';
-import { Provider } from 'react-redux';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

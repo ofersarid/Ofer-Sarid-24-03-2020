@@ -10,6 +10,18 @@
   }
 }
 
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
 @keyframes bounce {
   0% {
     transform: scale(1);
@@ -49,4 +61,9 @@ $ease: cubic-bezier(0.23, 1, 0.32, 1);
 %popIn {
   opacity: 0;
   animation: popIn 1.2s forwards $ease;
+}
+
+%slideUp {
+  opacity: 0;
+  animation: slideUp 1.2s forwards $ease;
 }

@@ -3,20 +3,19 @@
 .app {
   width: 100vw;
   height: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+
+  &.dark {
+    background: $black;
+    color: $textLight;
+  }
 }
 
 .navBar {
   height: 60px;
   width: 100vw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(black, 0.2);
   box-shadow: 0 1px 4px rgba(black, 0.15);
   padding: 0 15px;
   box-sizing: border-box;
@@ -24,23 +23,36 @@
   backdrop-filter: blur(5px);
   z-index: 1;
   background: rgba(white, 0.5);
+  overflow-x: auto;
 
   @include media('>phone') {
+    justify-content: space-between;
     padding: 0 50px;
     height: 70px;
   }
 
+  &.dark {
+    box-shadow: 0 1px 4px rgba(black, 0.5);
+    border-bottom: 1px solid rgba(white, 0.2);
+    background: rgba($black, 0.5);
+  }
+
   .right {
+    display: flex;
+    margin-right: 15px;
+
     .switch {
-      width: calc(100vw - 100px);
+      width: 200px;
       height: 40px;
+      margin-right: 15px;
 
       @include media('>phone') {
-        width: 300px;
+        width: 250px;
+        margin-left: 20px;
+        margin-right: 0;
       }
 
       @include media('>tablet') {
-        width: 400px;
         height: 50px;
       }
     }
@@ -64,7 +76,7 @@
     h1 {
       display: none;
 
-      @include media('>phone') {
+      @include media('>tablet') {
         padding-left: 20px;
         display: block;
       }

@@ -12,6 +12,34 @@
       @extend %popIn;
       display: inline-block;
     }
+
+    .zeroState {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        text-align: center;
+        width: 100%;
+        margin-top: 100px;
+        font-weight: normal;
+        letter-spacing: 0.03em;
+        color: $red;
+        @extend %popIn;
+        animation-delay: 0.2s;
+      }
+
+      svg {
+        height: 70px;
+        margin-top: 20px;
+        color: lighten($red, 30%);
+        @extend %slideUp;
+        animation-delay: 0.4s;
+        animation-duration: 2s;
+      }
+    }
   }
 
   ul {

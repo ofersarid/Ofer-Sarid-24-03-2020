@@ -4,6 +4,9 @@ import { Keyframes } from 'react-spring/renderprops';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import SwitchItem from './switch-item';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { user } from '../../services';
 
 class Switch extends PureComponent {
   constructor(props) {
@@ -31,7 +34,7 @@ class Switch extends PureComponent {
   }
 
   render() {
-    const { className, options } = this.props;
+    const { className, options, theme } = this.props;
     const index = this.getSelectedIndex();
     const childWidth = 100 / options.length;
     const from = {
@@ -84,8 +87,8 @@ class Switch extends PureComponent {
 
     return (
       <Springs state="indicate" >
-        {springs => <div className={cx(styles.switch, className)} >
-          <div className={cx('indicator', styles.indicator)} style={springs} />
+        {springs => <div className={cx(styles.switch, styles[theme], className)} >
+          <div className={cx('indicator', styles.indicator, styles[theme])} style={springs} />
           {options.map(item => (
             <SwitchItem
               key={item.view || item}
@@ -104,7 +107,14 @@ Switch.propTypes = {
   options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
     value: PropTypes.any,
     view: PropTypes.any
-  })]))
+  })])),
+  theme: PropTypes.string.isRequired,
 };
 
-export default Switch;
+const mapStateToProps = state => ({
+  theme: user.selectors.theme(state),
+});
+
+export default compose(
+  connect(mapStateToProps, {})
+)(Switch);

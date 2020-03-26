@@ -1,14 +1,12 @@
 import { fromJS } from 'immutable';
 import { reactLocalStorage } from 'reactjs-localstorage';
-// import axios from 'axios';
 
 const ADD = 'FAVORITES/ADD';
 const REMOVE = 'FORECAST/REMOVE';
 const STORE_FORECASTS = 'FORECAST/STORE_FORECASTS';
-// const API_KEY = 'AEihxQE2Ak5AlcuU8ZyKfPDhwBgAlAG8';
 
 const reducer = (state = fromJS({
-  locationKeys: reactLocalStorage.getObject('favorites', [], true) || [],
+  locationKeys: reactLocalStorage.getObject('favorites') || [],
   forecasts: [],
 }), action) => {
   let newState;
@@ -41,19 +39,6 @@ const actions = {
         locationKey
       });
   },
-  getForecast: () => async (dispatch, getState) => {
-    // const favorites = getState().getIn(['favorites', 'locationKeys']);
-    // const requests = favorites.toJS().map(key => {
-    //   return () => axios.get(`http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${key}?apikey=${API_KEY}`);
-    // });
-    // const resp = await axios.all(requests);
-    // todo - remove this before pull request
-    debugger; // eslint-disable-line
-    return dispatch({
-      type: STORE_FORECASTS,
-      payload: [],
-    });
-  }
 };
 
 const selectors = {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
 // import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { HeartBroken } from '@styled-icons/fa-solid/HeartBroken';
 import styles from './styles.scss';
 import { favorites } from '../../services';
 import FavoriteItem from './favorite-item';
@@ -21,11 +22,18 @@ class Favorites extends PureComponent {
       <div className={cx(styles.favorites)} >
         <div className={styles.inner} >
           <h1 >Favorites</h1 >
-          <ul >
-            {favorites.map(itm => (
-              <FavoriteItem key={itm} _key={itm} />
-            ))}
-          </ul >
+          {favorites.size ? (
+            <ul >
+              {favorites.map(itm => (
+                <FavoriteItem key={itm} _key={itm} />
+              ))}
+            </ul >
+          ) : (
+            <section className={styles.zeroState}>
+              <h2 >You don&apos;t have any favorites.</h2 >
+              <HeartBroken />
+            </section >
+          )}
         </div >
       </div >
     );

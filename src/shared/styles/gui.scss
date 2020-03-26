@@ -4,6 +4,10 @@
   box-shadow: 0 0 0 1px rgba(black, 0.2);
 }
 
+%box-border-light {
+  box-shadow: 0 0 0 1px rgba(white, 0.2);
+}
+
 %stage {
   display: flex;
   flex-direction: column;
