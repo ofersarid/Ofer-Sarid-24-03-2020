@@ -26,6 +26,7 @@ $mobileSpacing: 7%;
   &.dark {
     input {
       background: rgba($white, 0.05);
+      color: white;
       @extend %box-border-light;
 
       &:focus {
