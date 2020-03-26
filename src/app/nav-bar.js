@@ -25,7 +25,7 @@ class NavBar extends PureComponent {
     return (
       <div className={cx(styles.navBar)} >
         <section className={styles.left} >
-          <img src={'/images/herolo-logo.jpg'} />
+          <img src={'./images/herolo-logo.jpg'} />
           <h1>Herolo Weather App</h1>
         </section>
         <section className={styles.right} >

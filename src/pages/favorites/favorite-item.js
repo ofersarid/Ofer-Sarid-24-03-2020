@@ -43,7 +43,7 @@ class FavoriteItem extends PureComponent {
           <span className={styles.number} >{forecast.Temperature.Value}&deg;</span >
           <span className={styles.unit} >{forecast.Temperature.Unit}</span >
         </div >
-        <img src={`/images/weather-icons/${this.getWeatherIcon(forecast.WeatherIcon)}`} />
+        <img src={`./images/weather-icons/${this.getWeatherIcon(forecast.WeatherIcon)}`} />
         <div>{forecast.IconPhrase}</div>
       </li >
     ) : null;

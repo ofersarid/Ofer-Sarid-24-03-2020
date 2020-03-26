@@ -37,7 +37,7 @@ class Forecast extends PureComponent {
       <div className={cx(styles.forecast)} >
         <section className={styles.header} >
           <div >
-            <img src={`/images/weather-icons/${this.getWeatherIcon(dailyForecasts.getIn([0, 'Day', 'Icon']))}`} />
+            <img src={`./images/weather-icons/${this.getWeatherIcon(dailyForecasts.getIn([0, 'Day', 'Icon']))}`} />
             <h1 >{city}</h1 >
             <span className={styles.temperature} >{nowForecasts.getIn(['Temperature', 'Value'])}&deg;</span >
             <span className={styles.unit} >{nowForecasts.getIn(['Temperature', 'Unit'])}</span >
@@ -63,12 +63,12 @@ class Forecast extends PureComponent {
               </section >
               <ul className={styles.dayNight} >
                 <li >
-                  <img src={`/images/weather-icons/${this.getWeatherIcon(itm.getIn(['Day', 'Icon']))}`} />
+                  <img src={`./images/weather-icons/${this.getWeatherIcon(itm.getIn(['Day', 'Icon']))}`} />
                   <div >{itm.getIn(['Day', 'IconPhrase'])}</div >
                 </li >
                 <li className={styles.divider} />
                 <li >
-                  <img src={`/images/weather-icons/${this.getWeatherIcon(itm.getIn(['Night', 'Icon']))}`} />
+                  <img src={`./images/weather-icons/${this.getWeatherIcon(itm.getIn(['Night', 'Icon']))}`} />
                   <div >{itm.getIn(['Night', 'IconPhrase'])}</div >
                 </li >
               </ul >
