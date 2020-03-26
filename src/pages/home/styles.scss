@@ -145,7 +145,7 @@ $mobileSpacing: 7%;
 
     @include media('>phone') {
       margin-bottom: $spacing;
-      padding: 0;
+      padding: 0 10px;
     }
 
     & > div {
@@ -239,6 +239,10 @@ $mobileSpacing: 7%;
         min-width: 0;
         margin: 0;
         padding: 0;
+
+        @include media('>phone') {
+          display: none;
+        }
       }
 
       @include media('>phone') {
