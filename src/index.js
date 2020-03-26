@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router/immutable';
 import thunk from 'redux-thunk';
@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const history = createBrowserHistory();
+const history = createHashHistory();
 const store = createStore(
   combineReducers(history),
   composeEnhancers(
