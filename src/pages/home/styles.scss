@@ -5,6 +5,11 @@ $mobileSpacing: 7%;
 
 .home {
   @extend %stage;
+
+  @include media('>tablet') {
+    height: 90%;
+    justify-content: center;
+  }
 }
 
 .searchBox {
@@ -16,6 +21,7 @@ $mobileSpacing: 7%;
   align-items: center;
   position: relative;
   flex-shrink: 0;
+  @extend %slideUp;
 
   &.dark {
     input {
@@ -152,6 +158,7 @@ $mobileSpacing: 7%;
       display: inline-flex;
       align-items: center;
       @extend %popIn;
+      animation-delay: 0.3s;
 
       &:nth-of-type(2) {
         animation-delay: 0.5s;
@@ -220,9 +227,11 @@ $mobileSpacing: 7%;
       align-items: center;
       border-radius: 10px;
       flex-shrink: 0;
+      background: white;
 
       &.dark {
         border: 1px solid rgba(white, 0.2);
+        background: darken($black, 3%);
 
         .divider {
           background: rgba(white, 0.5);
@@ -257,7 +266,7 @@ $mobileSpacing: 7%;
 
       @for $i from 0 to 50 {
         &:nth-of-type(#{$i + 1}) {
-          animation-delay: #{$i * 0.1}s;
+          animation-delay: #{($i * 0.1) + 0.3}s;
         }
       }
 
