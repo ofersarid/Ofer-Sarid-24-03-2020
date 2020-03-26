@@ -6,7 +6,7 @@ const REMOVE = 'FORECAST/REMOVE';
 const STORE_FORECASTS = 'FORECAST/STORE_FORECASTS';
 
 const reducer = (state = fromJS({
-  locationKeys: reactLocalStorage.getObject('favorites') || [],
+  locationKeys: reactLocalStorage.getObject('favorites', [], true) || [],
   forecasts: [],
 }), action) => {
   let newState;

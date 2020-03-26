@@ -118,10 +118,6 @@ $mobileSpacing: 7%;
     margin-right: 20px;
   }
 
-  .divider {
-
-  }
-
   .city {
     margin-left: 20px;
   }
@@ -130,14 +126,9 @@ $mobileSpacing: 7%;
 .forecast {
   width: 1200px;
   max-width: 90vw;
-  //height: calc(100% - #{5 * $mobileSpacing});
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  //@include media('>phone') {
-  //  height: calc(100% - #{4 * $spacing});
-  //}
 
   .header {
     width: 100%;
@@ -223,6 +214,18 @@ $mobileSpacing: 7%;
       align-items: center;
       border-radius: 10px;
       flex-shrink: 0;
+
+      &.dark {
+        border: 1px solid rgba(white, 0.2);
+
+        .divider {
+          background: rgba(white, 0.5);
+        }
+
+        .dayNight .divider {
+          background: rgba(white, 0.5);
+        }
+      }
 
       @include media('>phone') {
         width: calc(50% - #{2 * $cardSpacing});

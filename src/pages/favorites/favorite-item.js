@@ -5,7 +5,7 @@ import autoBind from 'auto-bind';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styles from './styles.scss';
-import { forecast } from '../../services';
+import { forecast, user } from '../../services';
 
 class FavoriteItem extends PureComponent {
   constructor(props) {
@@ -13,7 +13,7 @@ class FavoriteItem extends PureComponent {
     autoBind(this);
     this.state = {
       city: null,
-      forecast: null,
+      forecast: null
     };
   }
 
@@ -36,15 +36,16 @@ class FavoriteItem extends PureComponent {
 
   render() {
     const { city, forecast } = this.state;
+    const { theme } = this.props;
     return (city && forecast) ? (
-      <li onClick={this.selectItem}>
+      <li onClick={this.selectItem} className={styles[theme]} >
         <h2 >{city}</h2 >
-        <div className={styles.temp}>
+        <div className={styles.temp} >
           <span className={styles.number} >{forecast.Temperature.Value}&deg;</span >
           <span className={styles.unit} >{forecast.Temperature.Unit}</span >
         </div >
         <img src={`./images/weather-icons/${this.getWeatherIcon(forecast.WeatherIcon)}`} />
-        <div>{forecast.IconPhrase}</div>
+        <div >{forecast.IconPhrase}</div >
       </li >
     ) : null;
   }
@@ -57,9 +58,12 @@ FavoriteItem.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  theme: PropTypes.string.isRequired
 };
 
-const mapStateToProps = state => ({}); // eslint-disable-line
+const mapStateToProps = state => ({
+  theme: user.selectors.theme(state)
+});
 
 const mapDispatchToProps = dispatch => ({
   getCityByKey: (locationKey, returnValue) => dispatch(forecast.actions.getCityByKey(locationKey, returnValue)),

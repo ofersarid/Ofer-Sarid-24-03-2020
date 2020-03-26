@@ -9,7 +9,7 @@ import moment from 'moment';
 import { HeartOutlined } from '@styled-icons/entypo/HeartOutlined';
 import { Heart } from '@styled-icons/entypo/Heart';
 import styles from './styles.scss';
-import { forecast, favorites, router } from '../../services';
+import { forecast, favorites, router, user } from '../../services';
 
 class Forecast extends PureComponent {
   constructor(props) {
@@ -32,7 +32,7 @@ class Forecast extends PureComponent {
   }
 
   render() {
-    const { dailyForecasts, city, nowForecasts, isFavorite } = this.props;
+    const { dailyForecasts, city, nowForecasts, isFavorite, theme } = this.props;
     return (dailyForecasts && nowForecasts) ? (
       <div className={cx(styles.forecast)} >
         <section className={styles.header} >
@@ -51,7 +51,7 @@ class Forecast extends PureComponent {
         </section >
         <ul className={styles.cards} >
           {dailyForecasts.map(itm => (
-            <li key={itm.get('EpochDate')} >
+            <li key={itm.get('EpochDate')} className={styles[theme]} >
               <h2 >{moment(itm.get('Date')).format('dddd')}</h2 >
               <div className={styles.date} >{moment(itm.get('Date')).format('MMMM Do')}</div >
               <section className={styles.temperature} >
@@ -87,7 +87,8 @@ Forecast.propTypes = {
   locationKey: PropTypes.string,
   toggleFavorite: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  getCityByKey: PropTypes.func.isRequired
+  getCityByKey: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -96,6 +97,7 @@ const mapStateToProps = (state) => ({
   city: forecast.selectors.city(state),
   isFavorite: favorites.selectors.isFavorite(state, router.selectors.locationKey(state)),
   locationKey: router.selectors.locationKey(state),
+  theme: user.selectors.theme(state)
 });
 
 const mapDispatchToProps = dispatch => ({

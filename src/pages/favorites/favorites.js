@@ -3,7 +3,6 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import autoBind from 'auto-bind';
-// import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { HeartBroken } from '@styled-icons/fa-solid/HeartBroken';
 import styles from './styles.scss';
@@ -29,7 +28,7 @@ class Favorites extends PureComponent {
               ))}
             </ul >
           ) : (
-            <section className={styles.zeroState}>
+            <section className={styles.zeroState} >
               <h2 >You don&apos;t have any favorites.</h2 >
               <HeartBroken />
             </section >
