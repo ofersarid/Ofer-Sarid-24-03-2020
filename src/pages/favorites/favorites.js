@@ -26,6 +26,7 @@ class Favorites extends PureComponent {
               {favorites.map(itm => (
                 <FavoriteItem key={itm} _key={itm} />
               ))}
+              <li className={styles.spacer} />
             </ul >
           ) : (
             <section className={styles.zeroState} >

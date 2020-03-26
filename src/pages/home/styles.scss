@@ -188,7 +188,7 @@ $mobileSpacing: 7%;
   .cards {
     $cardSpacing: 10px;
     list-style: none;
-    padding: 0 0 0 calc(10vw - #{2 * $cardSpacing});
+    padding: 0 0 0 5vw;
     margin: 0;
     display: flex;
     width: 100%;
@@ -198,6 +198,7 @@ $mobileSpacing: 7%;
     @include media('>phone') {
       flex-wrap: wrap;
       overflow: auto;
+      padding: 0;
     }
 
     @include media('>tablet') {
@@ -230,6 +231,14 @@ $mobileSpacing: 7%;
         .dayNight .divider {
           background: rgba(white, 0.5);
         }
+      }
+
+      &.spacer {
+        width: 5vw;
+        border: none;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
       }
 
       @include media('>phone') {

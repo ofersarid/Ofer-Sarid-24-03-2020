@@ -74,6 +74,7 @@ class Forecast extends PureComponent {
               </ul >
             </li >
           ))}
+          <li className={styles.spacer}/>
         </ul >
       </div >
     ) : null;

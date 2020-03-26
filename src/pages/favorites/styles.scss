@@ -4,13 +4,22 @@
   @extend %stage;
 
   .inner {
-    width: 1200px;
+    width: 100%;
     margin-top: 10px;
 
+    @include media('>phone') {
+      width: 1200px;
+      max-width: 90vw;
+    }
+
     h1 {
-      padding-left: 10px;
+      padding: 0 5vw;
       @extend %popIn;
       display: inline-block;
+
+      @include media('>phone') {
+        padding-left: 10px;
+      }
     }
 
     .zeroState {
@@ -43,27 +52,49 @@
   }
 
   ul {
+    $cardSpacing: 10px;
     margin: 0;
-    padding: 0;
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: auto;
+    padding: 0 0 0 calc(5vw - #{$cardSpacing});
+    width: 100%;
+
+    @include media('>phone') {
+      flex-wrap: wrap;
+      overflow: auto;
+      padding: 0;
+    }
 
     li {
-      $cardSpacing: 10px;
-      @extend %box-border;
+      border: 1px solid rgba(black, 0.2);
       @extend %popIn;
-      width: calc(20% - #{2 * $cardSpacing});
+      width: calc(55vw - #{2 * $cardSpacing});
       margin: $cardSpacing $cardSpacing;
       padding: 20px;
       box-sizing: border-box;
-      height: 250px;
+      height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
       cursor: pointer;
+      flex-shrink: 0;
+
+      @include media('>phone') {
+        width: calc(20% - #{2 * $cardSpacing});
+        height: 250px;
+      }
+
+      &.spacer {
+        width: 5vw;
+        border: none;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+      }
 
       &.dark {
         border: 1px solid rgba(white, 0.2);
