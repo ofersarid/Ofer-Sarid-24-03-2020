@@ -33,9 +33,10 @@
       h2 {
         text-align: center;
         width: 100%;
+        box-sizing: border-box;
+        padding: 0 10vw;
         margin-top: 100px;
         font-weight: normal;
-        letter-spacing: 0.03em;
         color: $red;
         @extend %popIn;
         animation-delay: 0.2s;
