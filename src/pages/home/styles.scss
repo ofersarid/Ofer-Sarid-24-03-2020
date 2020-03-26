@@ -63,7 +63,6 @@ $mobileSpacing: 7%;
   display: inline-flex;
   flex-direction: column;
   align-content: start;
-  margin-bottom: 10vw;
 
   @include media('>phone') {
     display: flex;

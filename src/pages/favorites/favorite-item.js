@@ -12,32 +12,17 @@ class FavoriteItem extends PureComponent {
     super(props);
     autoBind(this);
     this.state = {
-      city: 'Tel Aviv',
-      forecast: {
-        DateTime: '2020-03-24T23:00:00+02:00',
-        EpochDateTime: 1585083600,
-        HasPrecipitation: false,
-        IconPhrase: 'Intermittent clouds',
-        IsDaylight: false,
-        Link: 'http://www.accuweather.com/en/il/tel-aviv/215854/hourly-weather-forecast/215854?day=1&hbhhour=23&lang=en-us',
-        MobileLink: 'http://m.accuweather.com/en/il/tel-aviv/215854/hourly-weather-forecast/215854?day=1&hbhhour=23&lang=en-us',
-        PrecipitationProbability: 0,
-        Temperature: {
-          Unit: 'F',
-          UnitType: 18,
-          Value: 58
-        },
-        WeatherIcon: 36
-      }
+      city: null,
+      forecast: null,
     };
   }
 
   async componentDidMount() {
-    // const { _key, getCityByKey, getForecastNow } = this.props;
-    // const city = await getCityByKey(_key, true);
-    // this.setState({ city });
-    // const forecast = await getForecastNow(_key);
-    // this.setState({ forecast: forecast.payload });
+    const { _key, getCityByKey, getForecastNow } = this.props;
+    const city = await getCityByKey(_key, true);
+    this.setState({ city });
+    const forecast = await getForecastNow(_key);
+    this.setState({ forecast: forecast.payload });
   }
 
   getWeatherIcon(iconCode) {
@@ -51,7 +36,7 @@ class FavoriteItem extends PureComponent {
 
   render() {
     const { city, forecast } = this.state;
-    return (
+    return (city && forecast) ? (
       <li onClick={this.selectItem}>
         <h2 >{city}</h2 >
         <div className={styles.temp}>
@@ -61,7 +46,7 @@ class FavoriteItem extends PureComponent {
         <img src={`/images/weather-icons/${this.getWeatherIcon(forecast.WeatherIcon)}`} />
         <div>{forecast.IconPhrase}</div>
       </li >
-    );
+    ) : null;
   }
 }
 

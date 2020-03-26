@@ -16,10 +16,7 @@ class Home extends PureComponent {
   constructor(props) {
     super(props);
     autoBind(this);
-    this.state = {
-      working: false
-    };
-    this.onChDB = debounce(this.onSearchChange, 300);
+    this.onChDB = debounce(this.onSearchChange, 400);
   }
 
   componentDidMount() {
@@ -28,21 +25,17 @@ class Home extends PureComponent {
     getNowForecast(locationKey);
   }
 
-  async onSearchChange(val) {
+  onSearchChange(val) {
     const { searchCity } = this.props;
-    this.setState({ working: true });
-    await searchCity(val);
-    this.setState({ working: false });
+    searchCity(val);
   }
 
   render() {
-    const { working } = this.state;
     const { searchResults } = this.props;
     return (
       <div className={cx(styles.home)} >
         <SearchBox onChange={this.onChDB} />
         {searchResults.size > 0 ? <SearchResults /> : <Forecast />}
-        {working ? 'Working' : null}
       </div >
     );
   }

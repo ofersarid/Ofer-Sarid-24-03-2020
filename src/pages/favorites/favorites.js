@@ -25,11 +25,6 @@ class Favorites extends PureComponent {
             {favorites.map(itm => (
               <FavoriteItem key={itm} _key={itm} />
             ))}
-            <FavoriteItem key={0} _key="0" />
-            <FavoriteItem key={1} _key="1" />
-            <FavoriteItem key={2} _key="2" />
-            <FavoriteItem key={3} _key="3" />
-            <FavoriteItem key={4} _key="4" />
           </ul >
         </div >
       </div >
