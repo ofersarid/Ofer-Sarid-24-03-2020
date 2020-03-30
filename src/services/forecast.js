@@ -6,6 +6,7 @@ const STORE_DAILY_RESULTS = 'FORECAST/STORE_DAILY_RESULTS';
 const STORE_NOW_RESULT = 'FORECAST/STORE_NOW_RESULT';
 const STORE_CITY = 'FORECAST/STORE_CITY';
 const API_KEY = 'AEihxQE2Ak5AlcuU8ZyKfPDhwBgAlAG8';
+const PROTOCOL = window.location.protocol;
 
 const reducer = (state = fromJS({
   daily: null,
@@ -27,7 +28,7 @@ const reducer = (state = fromJS({
 const actions = {
   getDaily: (locationKey) => async dispatch => {
     try {
-      const resp = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}`);
+      const resp = await axios.get(`${PROTOCOL}//dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${API_KEY}`);
       dispatch({
         type: STORE_DAILY_RESULTS,
         payload: resp.data,
@@ -39,7 +40,7 @@ const actions = {
   },
   getNow: (locationKey, returnValue) => async dispatch => {
     try {
-      const resp = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${locationKey}?apikey=${API_KEY}`);
+      const resp = await axios.get(`${PROTOCOL}//dataservice.accuweather.com/forecasts/v1/hourly/1hour/${locationKey}?apikey=${API_KEY}`);
       return returnValue ? resp.data[0] : dispatch({
         type: STORE_NOW_RESULT,
         payload: resp.data[0],
@@ -50,7 +51,7 @@ const actions = {
   },
   getCityByKey: (locationKey, returnValue) => async dispatch => {
     try {
-      const resp = await axios.get(`http://dataservice.accuweather.com/locations/v1/${locationKey}?apikey=${API_KEY}`);
+      const resp = await axios.get(`${PROTOCOL}//dataservice.accuweather.com/locations/v1/${locationKey}?apikey=${API_KEY}`);
       return returnValue ? resp.data.EnglishName : dispatch({
         type: STORE_CITY,
         city: resp.data.EnglishName,

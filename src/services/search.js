@@ -5,6 +5,7 @@ import toasts from './toasts';
 const STORE_RESULTS = 'SEARCH/STORE_RESULTS';
 const CLEAR_RESULTS = 'SEARCH/CLEAR_RESULTS';
 const API_KEY = 'AEihxQE2Ak5AlcuU8ZyKfPDhwBgAlAG8';
+const PROTOCOL = window.location.protocol;
 
 const reducer = (state = fromJS({
   results: []
@@ -22,7 +23,7 @@ const reducer = (state = fromJS({
 const actions = {
   getResults: query => async dispatch => {
     try {
-      const resp = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURI(query)}`);
+      const resp = await axios.get(`${PROTOCOL}//dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${encodeURI(query)}`);
       dispatch({
         type: STORE_RESULTS,
         payload: resp.data
